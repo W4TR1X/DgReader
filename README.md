@@ -19,7 +19,7 @@ It does not support other data group types or other MRZ formats (such as TD2 or 
 // Example: Parsing DG1 data group (TD1 variant)
 var dg1Bytes = ... // Load DG1 bytes from eMRTD
 var dg1 = new DataGroup1(dg1Bytes);
-if (dg1.TryParse())
+if (dg1.Parse())
 {
     var data = dg1.Values;
     Console.WriteLine($"Document Number: {data.DocumentNumber}");
@@ -29,7 +29,7 @@ if (dg1.TryParse())
 // Example: Parsing DG11 data group
 var dg11Bytes = ... // Load DG11 bytes from eMRTD
 var dg11 = new DataGroup11(dg11Bytes);
-if (dg11.TryParse())
+if (dg11.Parse())
 {
     var data = dg11.Values;
     Console.WriteLine($"Full Name: {data.FirstName} {data.LastName}");

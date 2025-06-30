@@ -1,0 +1,36 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+      - name: Get version
+        id: get_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION="0.1.0-preview.${GITHUB_RUN_NUMBER}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Pack
+        run: dotnet pack src/DgReader/DgReader.csproj --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.get_version.outputs.version }}
+      - name: Publish NuGet package
+        #if: startsWith(github.ref, 'refs/tags/v')
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

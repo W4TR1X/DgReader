@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/test/DgReader.Tests/Data/dg11-base64.txt
+/test/DgReader.Tests/Data/dg1-base64.txt

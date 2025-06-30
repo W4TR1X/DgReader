@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DgReader", "src\DgReader\Dg
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2F857F84-935C-4CBC-B340-190770DC69F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DgReader.Tests", "test\DgReader.Tests\DgReader.Tests.csproj", "{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +26,17 @@ Global
 		{394923DB-BA84-47CB-9A0B-B9EAA4C1CD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{394923DB-BA84-47CB-9A0B-B9EAA4C1CD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{394923DB-BA84-47CB-9A0B-B9EAA4C1CD62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{394923DB-BA84-47CB-9A0B-B9EAA4C1CD62} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{40CD38EB-8F84-AA91-F465-DDDBA3CCB61B} = {2F857F84-935C-4CBC-B340-190770DC69F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B16FC17-B15A-4168-B820-16AE9BC0784B}

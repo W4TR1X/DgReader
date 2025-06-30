@@ -26,17 +26,6 @@ public abstract class DataGroup<T> where T : IDataGroupData
         => Convert.ToHexString(SHA256.HashData(Data));
 
     public abstract bool Parse();
-    public bool TryParse()
-    {
-        try
-        {
-            return Parse();
-        }
-        catch
-        {
-            return false;
-        }
-    }
 
     public abstract T? Values { get; }
 
