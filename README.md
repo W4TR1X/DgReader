@@ -2,6 +2,14 @@
 
 DgReader is a C# library for parsing and processing ICAO-compliant Data Groups found in electronic Machine Readable Travel Documents (eMRTDs) such as ePassports and ID cards.
 
+## NuGet
+
+[![NuGet](https://img.shields.io/nuget/v/DgReader.svg)](https://www.nuget.org/packages/DgReader)
+
+Install via NuGet Package Manager:
+dotnet add package DgReader
+[View on NuGet.org](https://www.nuget.org/packages/DgReader)
+
 **Currently, this library only supports parsing DG1 (MRZ) with the TD1 variant and DG11.**  
 It does not support other data group types or other MRZ formats (such as TD2 or TD3).
 
@@ -42,15 +50,7 @@ if (dg11.Parse())
 - **DG1 (TD1 only)**: MRZ (Machine Readable Zone) info: document type, number, names, nationality, date of birth, etc.
 - **DG11**: Additional personal details: full name, address, place of birth, etc.
 
-> **Note**: Other data group types and MRZ formats (such as TD2 or TD3) are not supported.
-
-## Installation
-
-Clone the repository and add the project to your solution:
-
-```bash
-git clone https://github.com/W4TR1X/DgReader.git
-```
+> **Note**: Other data group types and MRZ formats (such as TD2 or TD3) are not supported currently.
 
 ## License
 
