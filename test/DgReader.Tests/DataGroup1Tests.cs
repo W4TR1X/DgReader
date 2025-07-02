@@ -6,7 +6,41 @@ public sealed class DataGroup1Tests
     public async Task Parse_ValidTD1Data_ReturnsExpectedValues()
     {
         var content = await File.ReadAllTextAsync(
-            Path.Combine("Data", "dg1-base64.txt"));
+            Path.Combine("Data", "dg1-td1-base64.txt"));
+
+        // Act
+        var dg1 = new DataGroup1(Convert.FromBase64String(content));
+        var result = dg1.Parse();
+        var values = dg1.Values;
+
+        // Assert
+        Assert.True(result);
+        Assert.NotNull(values);
+        Assert.NotNull(values.Mrz);
+    }
+
+    [Fact]
+    public async Task Parse_ValidTD2Data_ReturnsExpectedValues()
+    {
+        var content = await File.ReadAllTextAsync(
+            Path.Combine("Data", "dg1-td2-base64.txt"));
+
+        // Act
+        var dg1 = new DataGroup1(Convert.FromBase64String(content));
+        var result = dg1.Parse();
+        var values = dg1.Values;
+
+        // Assert
+        Assert.True(result);
+        Assert.NotNull(values);
+        Assert.NotNull(values.Mrz);
+    }
+
+    [Fact]
+    public async Task Parse_ValidOtherData_ReturnsExpectedValues()
+    {
+        var content = await File.ReadAllTextAsync(
+            Path.Combine("Data", "dg1-other-base64.txt"));
 
         // Act
         var dg1 = new DataGroup1(Convert.FromBase64String(content));

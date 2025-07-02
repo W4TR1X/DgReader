@@ -1,6 +1,6 @@
 ﻿namespace DgReader.Data;
 
-public sealed class DataGroup2Data : IDataGroupData
+public sealed record DataGroup2Data : IDataGroupData
 {
     public int NumberOfImages { get; set; }
     public int VersionNumber { get; set; }
