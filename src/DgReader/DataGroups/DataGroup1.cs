@@ -35,8 +35,8 @@ public sealed class DataGroup1 : DataGroup<DataGroup1Data>
 
                 DocumentNumber = Encoding.UTF8.GetString(body[5..14]).Replace("<", ""),
 
-                IdentityNumber = Encoding.UTF8.GetString(body[15..30])
-                    + Encoding.UTF8.GetString(body[48..59]).Replace("<", ""),
+                IdentityNumber = (Encoding.UTF8.GetString(body[15..30])
+                    + Encoding.UTF8.GetString(body[48..59])).Replace("<", ""),
 
                 Gender = Encoding.UTF8.GetString(body[37..38]),
 
@@ -66,7 +66,7 @@ public sealed class DataGroup1 : DataGroup<DataGroup1Data>
 
                 DocumentNumber = Encoding.UTF8.GetString(body[36..45]).Replace("<", ""),
 
-                IdentityNumber = (Encoding.UTF8.GetString(body[64..71])).Replace("<", ""),
+                IdentityNumber = Encoding.UTF8.GetString(body[64..71]).Replace("<", ""),
 
                 Gender = Encoding.UTF8.GetString(body[56..57]),
 
