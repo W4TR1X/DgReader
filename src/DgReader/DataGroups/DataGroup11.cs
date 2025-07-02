@@ -1,4 +1,6 @@
-﻿namespace DgReader.DataGroups;
+﻿using System.Text;
+
+namespace DgReader.DataGroups;
 
 public sealed class DataGroup11 : DataGroup<DataGroup11Data>
 {
@@ -30,7 +32,9 @@ public sealed class DataGroup11 : DataGroup<DataGroup11Data>
             {
                 case 0x5F0E: (values.FirstName, values.LastName) = RetrieveName(value); break;
                 case 0x5F10: values.PersonalNumber = value; break;
-                case 0x5F2B: values.DateOfBirth = value; break;
+                case 0x5F2B: values.DateOfBirth =
+                    DateOnly.ParseExact(value, "yyMMdd", CultureInfo.InvariantCulture);
+                    break;
                 case 0x5F11: values.PlaceOfBirth = value; break;
                 case 0x5F42: values.Address = value; break;
                 case 0x5F12: values.Telephone = value; break;
@@ -50,9 +54,13 @@ public sealed class DataGroup11 : DataGroup<DataGroup11Data>
 
     private static (string FirstName, string LastName) RetrieveName(string value)
     {
-        var firstName = value[(value.LastIndexOf("<<") + 2)..].Replace("<", " ");
-        var lastName = value[..(value.LastIndexOf("<<"))];
+        if (value.Contains('<'))
+        {
+            var firstName = value[(value.LastIndexOf("<<") + 2)..].Replace("<", " ");
+            var lastName = value[..(value.LastIndexOf("<<"))];
 
-        return (firstName, lastName);
+            return (firstName, lastName);
+        }else
+            return (value, string.Empty);
     }
 }

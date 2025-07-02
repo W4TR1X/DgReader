@@ -6,7 +6,7 @@ public class DataGroup11Tests
     public async Task Parse_ValidData_ReturnsExpectedValues()
     {
         var content = await File.ReadAllTextAsync(
-            Path.Combine("Data","dg11-base64.txt"));
+            Path.Combine("Data","dg11-2-base64.txt"));
 
         // Act
         var dg11 = new DataGroup11(Convert.FromBase64String(content));

@@ -6,7 +6,7 @@ public sealed class DataGroup2Tests
     public async Task Parse_Valid_ReturnsExpectedValues()
     {
         var content = await File.ReadAllTextAsync(
-            Path.Combine("Data", "dg2-base64.txt"));
+            Path.Combine("Data", "dg2-2-base64.txt"));
 
         // Act
         var dg2 = new DataGroup2(Convert.FromBase64String(content));
