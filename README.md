@@ -10,13 +10,12 @@ Install via NuGet Package Manager:
 dotnet add package DgReader
 [View on NuGet.org](https://www.nuget.org/packages/DgReader)
  
-**Currently, this library supports parsing DG1 (MRZ) with the TD1 variant, DG11, and DG2 (Biometric Face Image).**  
-It does not support other data group types or other MRZ formats (such as TD2 or TD3).
+**This library supports parsing DG1, DG2, and DG11.**  
  
 ## Features
  
 - **ASN.1 Parsing**: Handles TLV/ASN.1 encoded data groups.
-- **Data Group Abstractions**: Provides base and specialized classes for DG1 (TD1), DG2 (Biometric Face Image), and DG11.
+- **Data Group Abstractions**: Provides base and specialized classes for DG1 (TD1, TD2, Other), DG2 (Biometric Face Image), and DG11.
 - **Data Extraction**: Extracts structured data such as name, document number, nationality, date of birth, address, biometric face image, and more.
 - **Error Handling**: Safe parsing methods and tag verification.
 - **Hash Calculation**: SHA256 hashing for data integrity.
@@ -24,7 +23,7 @@ It does not support other data group types or other MRZ formats (such as TD2 or 
 ## Example Usage
  
 ```csharp
-// Example: Parsing DG1 data group (TD1 variant)
+// Example: Parsing DG1 data group (TD1, TD2, or Other variant)
 var dg1Bytes = ... // Load DG1 bytes from eMRTD
 var dg1 = new DataGroup1(dg1Bytes);
 if (dg1.Parse())
@@ -32,6 +31,7 @@ if (dg1.Parse())
     var data = dg1.Values;
     Console.WriteLine($"Document Number: {data.DocumentNumber}");
     Console.WriteLine($"Name: {data.FirstName} {data.LastName}");
+    Console.WriteLine($"MRZ Type: {data.MrzDocumentType}"); // TD1, TD2, or Other
 }
  
 // Example: Parsing DG11 data group
@@ -59,11 +59,9 @@ if (dg2.Parse())
  
 ## Supported Data Groups
  
-- **DG1 (TD1 only)**: MRZ (Machine Readable Zone) info: document type, number, names, nationality, date of birth, etc.
+- **DG1 (TD1, TD2, Other)**: MRZ (Machine Readable Zone) info: document type, number, names, nationality, date of birth, etc. Supports TD1, TD2, and Other MRZ formats.
 - **DG2 (Biometric Face Image)**: Biometric facial image (JPEG/JPEG2000) and related metadata (image size, color space, quality, etc.).
 - **DG11**: Additional personal details: full name, address, place of birth, etc.
- 
-> **Note**: Other data group types and MRZ formats (such as TD2 or TD3) are not supported currently.
  
 ## License
  
@@ -77,3 +75,5 @@ Contributions are welcome! Please open issues or pull requests with improvements
  
 [W4TR1X](https://github.com/W4TR1X)  
 [batuhanoztrk](https://github.com/batuhanoztrk)
+ 
+ 
