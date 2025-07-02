@@ -1,6 +1,6 @@
 ﻿namespace DgReader.Data;
 
-public class DataGroup11Data : IDataGroupData
+public sealed class DataGroup11Data : IDataGroupData
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

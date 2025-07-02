@@ -1,6 +1,6 @@
 ﻿namespace DgReader.DataGroups;
 
-public class DataGroup11 : DataGroup<DataGroup11Data>
+public sealed class DataGroup11 : DataGroup<DataGroup11Data>
 {
     public DataGroup11(byte[] data) : base("DG11", data) { }
 

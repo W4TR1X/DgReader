@@ -1,6 +1,6 @@
 ﻿namespace DgReader.Data;
 
-public class DataGroup1Data : IDataGroupData
+public sealed class DataGroup1Data : IDataGroupData
 {
     public DateOnly DateOfBirth { get; set; }
     public string DocumentNumber { get; set; }

@@ -75,6 +75,9 @@ public abstract class DataGroup<T> where T : IDataGroupData
     protected virtual bool VerifyTag(int tag, int expectedTag)
         => tag == expectedTag;
 
+    protected virtual bool VerifyTag(int tag, int[] expectedTags)
+        => expectedTags.Contains(tag);
+
     private static (int Length, int LengthOffset) Asn1Length(byte[] data)
     {
         if (data[0] < 0x80)
@@ -117,4 +120,7 @@ public abstract class DataGroup<T> where T : IDataGroupData
 
         return BitConverter.ToString(val).Replace("-", "");
     }
+
+    protected static int BinToInt(byte[] val)
+        => Convert.ToInt32(BinToHexRep(val), 16);
 }
