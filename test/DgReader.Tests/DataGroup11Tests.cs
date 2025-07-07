@@ -2,6 +2,21 @@ namespace DgReader.Tests;
 
 public class DataGroup11Tests
 {
+   [Fact]
+    public async Task Parse_ValidData_ReturnsExpectedValuez()
+    {
+        var content = "aztcCF8OXxBfK18RXw4PT05VxZ48PEFCRFVMTEFIXxALMTQ0NDE3Mzc3MDhfKwQgAAQDXxEHTcSwRFlBVA==";
+
+        // Act
+        var dg11 = new DataGroup11(Convert.FromBase64String(content));
+        var result = dg11.Parse();
+        var values = dg11.Values;
+
+        // Assert
+        Assert.True(result);
+        Assert.NotNull(values);
+    }
+
     [Fact]
     public async Task Parse_ValidData_ReturnsExpectedValues()
     {

@@ -31,8 +31,28 @@ public sealed class DataGroup11 : DataGroup<DataGroup11Data>
                 case 0x5F0E: (values.FirstName, values.LastName) = RetrieveName(value); break;
                 case 0x5F10: values.PersonalNumber = value; break;
                 case 0x5F2B:
-                    values.DateOfBirth =
-                    DateOnly.ParseExact(value, value.Length == 8 ? "yyyyMMdd" : "yyMMdd", CultureInfo.InvariantCulture);
+                    try
+                    {
+                        if (value.Length == 8)
+                        {
+                            values.DateOfBirth =
+                                DateOnly.ParseExact(value, "yyyyMMdd", CultureInfo.InvariantCulture);
+                        }
+                        else if (value.Length == 6)
+                        {
+                            values.DateOfBirth =
+                                DateOnly.ParseExact(value, "yyMMdd", CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            values.DateOfBirth = null;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        values.DateOfBirth = null;
+                    }
+
                     break;
                 case 0x5F11: values.PlaceOfBirth = value; break;
                 case 0x5F42: values.Address = value; break;
