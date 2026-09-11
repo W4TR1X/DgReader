@@ -1,9 +1,7 @@
 ﻿namespace DgReader.DataGroups;
 
-public sealed class DataGroup11 : DataGroup<DataGroup11Data>
+public sealed class DataGroup11(byte[] data) : DataGroup<DataGroup11Data>("DG11", data)
 {
-    public DataGroup11(byte[] data) : base("DG11", data) { }
-
     private DataGroup11Data? _values;
     public override DataGroup11Data? Values => _values;
 
@@ -80,7 +78,7 @@ public sealed class DataGroup11 : DataGroup<DataGroup11Data>
 
             return (firstName, lastName);
         }
-        else
-            return (value, string.Empty);
+
+        return (value, string.Empty);
     }
 }

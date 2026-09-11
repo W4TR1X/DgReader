@@ -1,3 +1,5 @@
+using DgReader.Data;
+
 namespace DgReader.Tests;
 
 public sealed class DataGroup1Tests
@@ -51,6 +53,19 @@ public sealed class DataGroup1Tests
         Assert.True(result);
         Assert.NotNull(values);
         Assert.NotNull(values.Mrz);
+    }
+
+    [Fact]
+    public void DateOnlyProperties_CanBeAssigned()
+    {
+        var data = new DataGroup1Data
+        {
+            DateOfBirth = new DateOnly(1985, 6, 21),
+            ValidUntil = new DateOnly(2028, 1, 1),
+        };
+
+        Assert.Equal(new DateOnly(1985, 6, 21), data.DateOfBirth);
+        Assert.Equal(new DateOnly(2028, 1, 1), data.ValidUntil);
     }
 
     [Fact]

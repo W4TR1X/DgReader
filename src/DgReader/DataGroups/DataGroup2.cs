@@ -1,10 +1,6 @@
-﻿
-using Org.BouncyCastle.Tls;
-using System.IO;
+﻿namespace DgReader.DataGroups;
 
-namespace DgReader.DataGroups;
-
-public sealed class DataGroup2 : DataGroup<DataGroup2Data>
+public sealed class DataGroup2(byte[] data) : DataGroup<DataGroup2Data>("DG2", data)
 {
     private DataGroup2Data? _values;
     public override DataGroup2Data? Values => _values;
@@ -12,8 +8,6 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
     private readonly static byte[] JpegHeader = [0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46];
     private readonly static byte[] Jpeg2000BitmapHeader = [0x00, 0x00, 0x00, 0x0c, 0x6a, 0x50, 0x20, 0x20, 0x0d, 0x0a];
     private readonly static byte[] Jpeg2000CodestreamBitmapHeader = [0xff, 0x4f, 0xff, 0x51];
-
-    public DataGroup2(byte[] data) : base("DG2", data) { }
 
     public override bool Parse()
     {
@@ -61,7 +55,9 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
     {
         if (data[0] != 0x46 && data[1] != 0x41
          && data[2] != 0x43 && data[3] != 0x00)
+        {
             return false;
+        }
 
         int offset = 4;
 
@@ -81,13 +77,13 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
         offset += 2;
 
         values.Gender = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.EyeColor = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.HairColor = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.FeatureMask = BinToInt(data[offset..(offset + 3)]);
         offset += 3;
@@ -104,10 +100,10 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
         offset += values.NumberOfFeaturePoints * 8;
 
         values.FaceImageType = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.ImageDataType = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.ImageWidth = BinToInt(data[offset..(offset + 2)]);
         offset += 2;
@@ -116,10 +112,10 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
         offset += 2;
 
         values.ImageColorSpace = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.SourceType = BinToInt(data[offset..(offset + 1)]);
-        offset += 1;
+        offset++;
 
         values.DeviceType = BinToInt(data[offset..(offset + 2)]);
         offset += 2;
@@ -139,9 +135,6 @@ public sealed class DataGroup2 : DataGroup<DataGroup2Data>
 
         values.ImageData = data[offset..];
 
-        if(values.ImageData is { Length: > 0 } )
-            return true;
-
-        return false;
+        return values.ImageData is { Length: > 0 };
     }
 }
