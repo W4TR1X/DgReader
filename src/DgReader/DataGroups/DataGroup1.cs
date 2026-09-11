@@ -1,9 +1,7 @@
 ﻿namespace DgReader.DataGroups;
 
-public sealed class DataGroup1 : DataGroup<DataGroup1Data>
+public sealed class DataGroup1(byte[] data) : DataGroup<DataGroup1Data>("DG1", data)
 {
-    public DataGroup1(byte[] data) : base("DG1", data) { }
-
     private DataGroup1Data? _values;
     public override DataGroup1Data? Values => _values;
 
@@ -126,9 +124,7 @@ public sealed class DataGroup1 : DataGroup<DataGroup1Data>
     }
 
     private static string[] RetrieveNameParts(string value)
-        => value.Split("<")
-            .Where(x => !string.IsNullOrEmpty(x))
-            .ToArray();
+        => [.. value.Split('<').Where(x => !string.IsNullOrEmpty(x))];
 
     static MrzDocumentType getMRZType(int length)
         => length switch
@@ -137,6 +133,4 @@ public sealed class DataGroup1 : DataGroup<DataGroup1Data>
             0x48 => MrzDocumentType.TD2,
             _ => MrzDocumentType.Other,
         };
-
-
 }

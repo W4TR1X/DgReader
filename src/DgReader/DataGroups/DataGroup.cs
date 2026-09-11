@@ -2,10 +2,10 @@
 
 public abstract class DataGroup<T> where T : IDataGroupData
 {
-    public byte[] Data { get; private set; }
-    public byte[] Body { get; private set; }
+    public byte[] Data { get; }
+    public byte[] Body { get; }
     public int Position { get; internal set; }
-    public string Type { get; private set; }
+    public string Type { get; }
 
     protected DataGroup(string type, byte[] data)
     {
@@ -23,7 +23,13 @@ public abstract class DataGroup<T> where T : IDataGroupData
     }
 
     public string Hash
-        => Convert.ToHexString(SHA256.HashData(Data));
+    {
+        get
+        {
+            using var sha256 = SHA256.Create();
+            return BinToHexRep(sha256.ComputeHash(Data));
+        }
+    }
 
     public abstract bool Parse();
 
@@ -66,7 +72,7 @@ public abstract class DataGroup<T> where T : IDataGroupData
         else
         {
             tag = Data[Position];
-            Position += 1;
+            Position++;
         }
 
         return tag;
