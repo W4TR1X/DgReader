@@ -2,7 +2,7 @@
 
 public sealed record DataGroup12Data : IDataGroupData
 {
-    public string IssuingAuthority { get; set; }
+    public string? IssuingAuthority { get; set; }
     public DateOnly? DateOfIssue { get; set; }
     public string? OtherPersonsDetails { get; set; }
     public string? EndorsmentsOrObservations { get; set; }
