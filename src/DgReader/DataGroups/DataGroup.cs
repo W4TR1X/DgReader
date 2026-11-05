@@ -22,13 +22,10 @@ public abstract class DataGroup<T> where T : IDataGroupData
         Body = Data[Position..];
     }
 
-    public string Hash
+    public string ComputeHash(HashAlgorithmName algorithm)
     {
-        get
-        {
-            using var sha256 = SHA256.Create();
-            return BinToHexRep(sha256.ComputeHash(Data));
-        }
+        using var hashAlgorithm = HashAlgorithm.Create(algorithm.Name);
+        return BinToHexRep(hashAlgorithm.ComputeHash(Data));
     }
 
     public abstract bool Parse();
